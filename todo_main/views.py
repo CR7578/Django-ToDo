@@ -1,4 +1,9 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+from todo.models import Task
 
 def home(request):
-    return HttpResponse("<h1>Welcome to the ToDo App Home Page!</h1>")
+    tasks = Task.objects.filter(is_completed=False)
+    context = {
+        'tasks':tasks
+    }
+    return render(request, 'home.html',context)
