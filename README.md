@@ -31,18 +31,13 @@
 
 ---
 
-## 🎬 Demo
-
 ### 📹 Video Walkthrough
 
-https://github.com/user-attachments/assets/Django-Todo-Output.mp4
+https://github.com/CR7578/Django-ToDo/raw/main/assets/Django-Todo-Output.mp4
 
 > *Watch the full demo showing all features in action*
 
 ### 📸 Screenshots
-
-<details>
-<summary><strong>🖼️ Click to view screenshots</strong></summary>
 
 #### Adding a New Task
 ![Add Task](assets/Add.png)
@@ -56,7 +51,6 @@ https://github.com/user-attachments/assets/Django-Todo-Output.mp4
 ![Task Done](assets/Done.png)
 *Visual distinction between active and completed tasks*
 
-</details>
 
 ---
 
@@ -293,7 +287,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 <div align="center">
 
-**CR7578**
+**CHETHAN N**
 
 [![GitHub](https://img.shields.io/badge/GitHub-CR7578-181717?style=for-the-badge&logo=github)](https://github.com/CR7578)
 
