@@ -73,18 +73,33 @@
                 <div class="row g-4">
                     <div class="col-md-7">
                         <h5 class="fw-bold mb-4 d-flex align-items-center">
-                            <span class="badge bg-primary me-2">!</span> My Tasks
+                            <span class="badge bg-primary me-2">!</span> My To-Do Tasks
                         </h5>
                         <div class="scroll-area">
                             
                             <div class="card task-card mb-3 shadow-sm">
+                                {% if tasks|length == 0 %}
+                            <p class="text-center text-muted">No Tasks Added yet!</p>
+                                {% endif %}
                                 {% for task in tasks %}
-                                <div class="card-body d-flex justify-content-between align-items-center">
-                                    <span class="fw-medium text-dark">{{ task.task }}</span>
-                                    <div class="btn-group btn-group-sm">
-                                        <a href="#" class="btn btn-outline-success" title="Mark as Done"><i class="fas fa-check"></i></a>
-                                        <a href="#" class="btn btn-outline-primary" title="Edit"><i class="fas fa-pen"></i></a>
-                                        <a href="#" class="btn btn-outline-danger" title="Delete"><i class="fas fa-trash"></i></a>
+                                <div class="card-body d-flex justify-content-between align-items-center" id="task-container-{{ task.pk }}">
+                                    
+                                    <span class="fw-medium text-dark task-text">{{ task.task }}</span>
+
+                                    <form action="{% url 'editTask' task.pk %}" method="POST" class="edit-form d-none d-flex flex-grow-1 me-2">
+                                        {% csrf_token %}
+                                        <input type="text" name="task" class="form-control form-control-sm me-2" value="{{ task.task }}">
+                                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                    </form>
+                                    
+                                    <div class="btn-group btn-group-sm action-buttons">
+                                        <a href="{% url 'taskDone' task.pk %}" class="btn btn-outline-success" title="Mark as Done"><i class="fas fa-check"></i></a>
+                                        
+                                        <button type="button" class="btn btn-outline-primary edit-btn" onclick="toggleEdit('{{ task.pk }}')" title="Edit">
+                                            <i class="fas fa-pen"></i>
+                                        </button>
+                                        
+                                        <a href="{% url 'delete' task.pk %}" class="btn btn-outline-danger" title="Delete"><i class="fas fa-trash"></i></a>
                                     </div>
                                 </div>
                                 {% endfor %}
@@ -97,21 +112,45 @@
                             <i class="fas fa-check-circle me-2 text-success"></i> Completed
                         </h5>
                         <div class="scroll-area">
-                            
+                            {% if tasks_completed|length == 0 %}
+                            <p class="text-center text-muted">No completed tasks yet!</p>
+                            {% endif %}
+                            {% for completed in tasks_completed %}
                             <div class="card completed-task mb-2 border-0 shadow-sm">
                                 <div class="card-body py-2 d-flex justify-content-between align-items-center">
-                                    <del class="text-muted">Setup database models</del>
-                                    <i class="fas fa-check text-success small"></i>
+                                    <del class="text-muted">{{ completed.task }}</del>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{% url 'taskNotdone' completed.pk %}" class="btn btn-outline-primary" title="Notdone"><i class="fas fa-close"></i></a>
+                                        <a href="{% url 'delete' completed.pk %}" class="btn btn-outline-danger" title="Delete"><i class="fas fa-trash"></i></a>
+                                    </div>
                                 </div>
                             </div>
-
+                            {% endfor %}
                         </div>
                     </div>
-                </div> </div> <p class="text-center mt-4 text-muted small"><a href="https://github.com/CR7578/Django-ToDo">Built with Django & Bootstrap 5 - CR7578</a></p>
+                </div> </div> <p class="text-center mt-4 text-muted small">Built with Python and Django - <a href="https://github.com/CR7578/Django-ToDo">Git Repository</a></p>
         </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function toggleEdit(taskId) {
+    const container = document.getElementById(`task-container-${taskId}`);
+    const textSpan = container.querySelector('.task-text');
+    const editForm = container.querySelector('.edit-form');
+    const actionBtns = container.querySelector('.action-buttons');
+
+    // Toggle classes: d-none hides an element in Bootstrap
+    textSpan.classList.toggle('d-none');
+    editForm.classList.toggle('d-none');
+    actionBtns.classList.toggle('d-none');
+
+    // Focus the input automatically when clicking edit
+    if (!editForm.classList.contains('d-none')) {
+        editForm.querySelector('input').focus();
+    }
+}
+</script>
 </body>
 </html>
