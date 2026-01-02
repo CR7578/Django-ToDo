@@ -60,9 +60,10 @@
 
             <div class="card main-card p-4 p-md-5 bg-white">
                 
-                <form action="" method="POST" class="mb-5">
+                <form action="{% url 'addTask' %}" method="POST" class="mb-5">
+                    {% csrf_token %}
                     <div class="input-group input-group-lg">
-                        <input type="text" class="form-control border-primary-subtle" placeholder="What needs to be done?" aria-label="Add task">
+                        <input type="text" name="task" class="form-control border-primary-subtle" placeholder="What needs to be done?" aria-label="Add task">
                         <button class="btn btn-primary px-4" type="submit">
                             <i class="fas fa-plus me-2"></i>Add Task
                         </button>
