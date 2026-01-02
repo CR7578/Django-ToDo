@@ -33,7 +33,13 @@
 
 ### 📹 Video Walkthrough
 
-https://github.com/CR7578/Django-ToDo/raw/main/assets/Django-Todo-Output.mp4
+<div align="center">
+  <video src="assets/Django-Todo-Output.mp4" width="100%" controls>
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+[Click here to watch the demo video](assets/Django-Todo-Output.mp4)
 
 > *Watch the full demo showing all features in action*
 
