@@ -33,7 +33,7 @@
 
 ### 📹 Video Walkthrough
 
-[[Output video]](assets/Django-Todo-Output.mp4)
+![Output video](assets/Django-Todo-Output.mp4)
 
 > *Watch the full demo showing all features in action*
 
